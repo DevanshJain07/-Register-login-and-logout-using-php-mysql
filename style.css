@@ -1,0 +1,49 @@
+body{
+    padding: 0px;
+    margin: 0px;
+}
+.header{
+    background-color: black;
+    color: white;
+    text-align: center;
+    top:0px;
+    width: 100%;
+    padding: 5px;
+}
+form{
+    width: 40%;
+    padding: 30px;
+    border: 1px solid #cbcbcb;
+    margin: 5px auto;
+}
+.textInput{
+    margin-top: 2px;
+    height: 28px;
+    border:1px solid #5e6e66;
+    font-size: 16px;
+    padding: 1px;
+    width: 100%;
+}
+#error_msg{
+    width: 50%;
+    margin: 5px auto;
+    height:30px;
+    border:1px solid #ff0000;
+    background:#ffb988;
+    color:#ff0000;
+    text-align:center;
+    padding-top: 10px;
+}
+td{
+    text-align: right;
+}
+.error{
+    width: 92%;
+    margin: 0px auto;
+    padding:10px;
+    border: 1px solid #a94442;
+    color: #a94442;
+background: #f2dede;
+border-radius:5px;
+text-align:left;
+}
