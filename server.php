@@ -6,6 +6,9 @@ $errors=array();
 //connect to the database
 $db = mysqli_connect("localhost","root","","authentication") or die($db);
 //if the register button is clicked
+if($db === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
 if(isset($_POST['register_btn'])){
     $username= mysqli_real_escape_string($db,$_POST['username']);
     $email= mysqli_real_escape_string($db,$_POST['email']);
@@ -20,16 +23,21 @@ if(empty($email)){
 if(empty($password)){
     array_push($errors,"Password is required");
 }
-if($password!=$password2){
-    array_push($errors,"The two passwords do not match");
-}
-if(count($errors) == 0){
+if($password==$password2){
+//     array_push($errors,"The two passwords do not match");
+// }
+// if(count($errors) == 0){
     $password=md5($password);//hash password before string for security for security purposes
     $sql="INSERT INTO users (username, email, password2) VALUES('$username', '$email', '$password')";
     mysqli_query($db,$sql);
     $_SESSION['username']=$username;
     $_SESSION['success']="You are now logged in";
     header("location:home.php");
+    if(mysqli_query($db, $sql)){
+        echo "Records inserted successfully.";
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
 }else{
     $_SESSION['success']="The two passwords do not match";
 }
@@ -52,10 +60,11 @@ if(count($errors)==0){
         $_SESSION['username']=$username;
     $_SESSION['success']="You are now logged in";
     header("location:home.php");
-}else{
+}
+else{
     array_push($errors,"wrong username/password combination");
         }
-    }
+    }   
 }
 //logout
 if(isset($_GET['logout'])){
