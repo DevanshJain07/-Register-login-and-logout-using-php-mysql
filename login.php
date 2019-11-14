@@ -1,5 +1,4 @@
-<?php include('server.php'); ?>
-
+<?php include 'server.php'; ?>
 <html>
     <head>
         <title>Register, login and logout user php mysql</title>
@@ -11,16 +10,14 @@
         </div>
     <form method="post" action="login.php">
     <?php include('errors.php');?>
-
         <table>
-            <tr>
+        <tr>
                 <td>Username:</td>
-                <td><input type="text" name="username" class="textInput" required></td>
+                <td><input type="text" name="username" class="textInput" value="<?php echo $username; ?>"></td>
             </tr>
-            
             <tr>
                 <td>Password:</td>
-                <td><input type="password" name="password" class="textInput" required></td>
+                <td><input type="password" name="password" class="textInput"></td>
             </tr>
             
                 <td></td>
