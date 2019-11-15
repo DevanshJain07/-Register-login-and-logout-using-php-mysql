@@ -10,10 +10,10 @@ if($db === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 if(isset($_POST['register_btn'])){
-    $username= mysqli_real_escape_string($db,$_POST['username']);
-    $email= mysqli_real_escape_string($db,$_POST['email']);
-    $password= mysqli_real_escape_string($db,$_POST['password']);
-    $password2= mysqli_real_escape_string($db,$_POST['password2']);
+    $username= $_POST['username'];
+    $email= $_POST['email'];
+    $password= $_POST['password'];
+    $password2= $_POST['password2'];
 if(empty($username)){
     array_push($errors,"Username is required");
 }
@@ -23,17 +23,18 @@ if(empty($email)){
 if(empty($password)){
     array_push($errors,"Password is required");
 }
-if($password==$password2){
-//     array_push($errors,"The two passwords do not match");
-// }
-// if(count($errors) == 0){
+if($password!=$password2){
+    array_push($errors,"The two passwords do not match");
+}
+
+if(count($errors) == 0){
     $password=md5($password);//hash password before string for security for security purposes
-    $sql="INSERT INTO users (username, email, password2) VALUES('$username', '$email', '$password')";
-    mysqli_query($db,$sql);
+    $sql="INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
+    $res = mysqli_query($db,$sql);
     $_SESSION['username']=$username;
     $_SESSION['success']="You are now logged in";
     header("location:home.php");
-    if(mysqli_query($db, $sql)){
+    if($res){
         echo "Records inserted successfully.";
     } else{
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
